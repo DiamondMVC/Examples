@@ -1,0 +1,25 @@
+{
+  "name": "Authentication - ACL",
+  "homeRoute": "login",
+  "addresses": [{
+    "ipAddresses": ["::1", "127.0.0.1"],
+    "port": 8080
+  }],
+  "defaultHeaders": {
+    "general": {
+      "Content-Type": "text/html; charset=UTF-8",
+      "Server": "vibe.d - Diamond MVC v3.0.0"
+    },
+    "staticFiles": {
+      "Server": "vibe.d - Diamond MVC v3.0.0"
+    },
+    "notFound": {
+      "Content-Type": "text/html; charset=UTF-8",
+      "Server": "vibe.d - Diamond MVC v3.0.0"
+    },
+    "error": {
+      "Content-Type": "text/html; charset=UTF-8",
+      "Server": "vibe.d - Diamond MVC v3.0.0"
+    }
+  }
+}
