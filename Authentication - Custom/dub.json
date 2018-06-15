@@ -1,0 +1,21 @@
+{
+	"dependencies": {
+		"vibe-d": "~>0.8.3",
+		"diamond": "~>3.0.0",
+		"mysql-native": "~>2.2.1"
+	},
+	"versions": [
+		"Diamond_Debug"
+	],
+	"sourcePaths": [
+		"core",
+		"models",
+		"controllers"
+	],
+	"stringImportPaths": [
+		"config",
+		"views"
+	],
+	"name": "authentication-custom",
+	"targetType": "executable"
+}
