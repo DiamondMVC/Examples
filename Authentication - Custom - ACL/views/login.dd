@@ -1,0 +1,71 @@
+@[
+  route:
+    login
+]
+
+<script>
+function ajax(url, method, callback, data) {
+  var xhr = new XMLHttpRequest();
+
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = window.location.protocol + '//' + window.location.host + url;
+  }
+
+  xhr.open(method, url, true);
+
+  if (method === 'POST' || method === 'PUT') {
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  }
+
+  xhr.onreadystatechange = function() {
+    if (xhr.status !== 200) {
+      console.error(xhr.status);
+    } else if (xhr.readyState === 4) {
+      console.info(xhr.responseText);
+
+      if (callback) {
+        callback(xhr.responseText);
+      }
+    }
+  };
+
+  xhr.send(data ? JSON.stringify(data) : undefined);
+}
+
+function login() {
+  var username = document.getElementById('username').value,
+      password = document.getElementById('password').value;
+
+  ajax('/auth/login', 'POST', function(json) {
+    var result = JSON.parse(json);
+
+    if (!result || !result.success) {
+      document.getElementById('status').innerHTML = 'Invalid username or password.';
+    } else {
+      location.reload(true);
+    }
+  }, {
+    username: username,
+    password: password
+  });
+}
+
+function logout() {
+  ajax('/auth/logout', 'POST', function() {
+    location.reload(true);
+  });
+}
+</script>
+
+<form method="post">
+  @:if (client.role.name == "user") {
+    <input type="button" onclick="logout()" value="Logout">
+  }
+  @:else {
+      Username: <input id="username" name="username"><br>
+      Password: <input id="password" name="password" type="password"><br>
+      <br>
+      <input type="button" onclick="login()" value="Login">
+      <p id="status" style="color: #ff0000;"></p>
+  }
+</form>
